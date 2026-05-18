@@ -158,10 +158,8 @@
             </button>
         </nav>
     </div>
-
-    <audio id="bgMusic" loop>
-        <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mp3">
-        </audio>
+<div id="youtube-player" style="display: none;"></div>
+<script src="https://www.youtube.com/iframe_api"></script>
 
     <script>
         // التحقق من الباسورد الجديد
@@ -170,8 +168,14 @@
             const error = document.getElementById('errorMsg');
             const music = document.getElementById('bgMusic');
             
-            if(entered.trim().toLowerCase() === 'love rodina') {
-                document.getElementById('lockScreen').classList.add('hide');
+            let musicPlayer;
+function onYouTubeIframeAPIReady() {
+    musicPlayer = new YT.Player('youtube-player', {
+        videoId: 'fGFB29lQ-Vs',
+        playerVars: { 'autoplay': 0, 'loop': 1, 'playlist': 'fGFB29lQ-Vs' }
+    });
+}
+
                 document.getElementById('mainContent').classList.add('show');
                 
                 // تشغيل الأغنية تلقائياً عند الفتح
