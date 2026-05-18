@@ -3,61 +3,147 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>مفاجأة خاصة جداً ❤️</title>
+    <title>مفاجأة لـ Rodina ❤️</title>
     <style>
         * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
-        body { background: linear-gradient(135deg, #150030, #050015); color: white; display: flex; justify-content: center; align-items: center; min-height: 100vh; overflow: hidden; text-align: center; direction: rtl; }
+        body { background: #0c0813; color: white; min-height: 100vh; overflow-x: hidden; text-align: center; direction: rtl; }
         
         /* شاشة القفل */
-        .lock-screen { display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 20px; z-index: 10; width: 100%; max-width: 400px; }
-        .lock-screen h2 { font-size: 2rem; margin-bottom: 10px; display: flex; align-items: center; gap: 10px; }
-        .lock-screen p { color: #b3b3b3; font-size: 0.9rem; margin-bottom: 30px; }
-        .input-box { width: 100%; background: rgba(255, 255, 255, 0.05); border: 2px solid rgba(255, 255, 255, 0.1); padding: 15px; border-radius: 15px; color: white; font-size: 1.2rem; text-align: center; letter-spacing: 2px; margin-bottom: 20px; outline: none; transition: 0.3s; }
-        .input-box:focus { border-color: #ff2a74; box-shadow: 0 0 15px rgba(255, 42, 116, 0.4); }
-        .btn { background: #ff2a74; color: white; border: none; padding: 15px 30px; font-size: 1.1rem; border-radius: 15px; cursor: pointer; width: 100%; font-weight: bold; transition: 0.3s; }
-        .btn:hover { background: #e01e5f; transform: scale(1.02); }
+        .lock-screen { display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 20px; min-height: 100vh; width: 100%; max-width: 400px; margin: 0 auto; position: relative; z-index: 10; }
+        .lock-screen h1 { font-size: 3.5rem; color: #ff2a74; margin-bottom: 20px; font-weight: bold; font-family: 'Georgia', serif; }
+        .lock-screen p { color: #b3b3b3; font-size: 1rem; margin-bottom: 30px; }
+        .input-box { width: 100%; background: rgba(255, 255, 255, 0.03); border: 2px solid #ff2a74; padding: 15px; border-radius: 30px; color: white; font-size: 1.2rem; text-align: center; margin-bottom: 20px; outline: none; transition: 0.3s; box-shadow: 0 0 15px rgba(255, 42, 116, 0.2); }
+        .btn { background: linear-gradient(90deg, #ff2a74, #b01a88); color: white; border: none; padding: 15px 30px; font-size: 1.1rem; border-radius: 30px; cursor: pointer; width: 100%; font-weight: bold; transition: 0.3s; box-shadow: 0 4px 15px rgba(255, 42, 116, 0.4); }
+        .btn:hover { transform: scale(1.02); opacity: 0.9; }
         .error-msg { color: #ff4a4a; margin-top: 10px; font-size: 0.9rem; display: none; }
 
-        /* شاشة المفاجأة */
-        .content-screen { display: none; flex-direction: column; align-items: center; justify-content: center; padding: 20px; z-index: 10; animation: fadeIn 1.5s ease-in-out forwards; width: 100%; max-width: 500px; }
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+        /* الشاشة الرئيسية */
+        .main-site { display: none; flex-direction: column; min-height: 100vh; width: 100%; max-width: 500px; margin: 0 auto; padding-bottom: 40px; }
         
-        .main-title { font-size: 3.5rem; letter-spacing: 2px; color: white; text-transform: uppercase; margin-bottom: 20px; text-shadow: 0 0 20px rgba(255,255,255,0.6); }
-        .sub-text { font-size: 1.3rem; line-height: 1.6; margin-bottom: 30px; color: #ffccd5; }
-        .card { background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.1); backdrop-filter: blur(10px); padding: 25px; border-radius: 20px; width: 100%; box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
-        .card-title { font-size: 1.2rem; margin-bottom: 15px; color: #ff4a8d; }
-        .date-box { background: #000; border: 2px solid #ff2a74; padding: 12px; border-radius: 30px; font-size: 1.4rem; font-weight: bold; display: inline-block; padding-left: 25px; padding-right: 25px; letter-spacing: 1px; box-shadow: 0 0 15px rgba(255, 42, 116, 0.3); direction: ltr; }
+        /* التبويبات العلوية من الفيديو */
+        .nav-tabs { display: flex; justify-content: space-around; background: #150f22; padding: 15px 5px; position: sticky; top: 0; z-index: 100; border-bottom: 1px solid rgba(255, 255, 255, 0.05); }
+        .tab-btn { background: none; border: none; color: #a5a1b2; font-size: 1rem; font-weight: bold; cursor: pointer; padding: 5px 10px; transition: 0.3s; }
+        .tab-btn.active { color: #ff2a74; border-bottom: 2px solid #ff2a74; }
+
+        /* محتوى الأقسام */
+        .tab-content { display: none; padding: 25px 20px; animation: fadeIn 0.5s ease-in-out forwards; }
+        .tab-content.active { display: flex; flex-direction: column; align-items: center; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+        /* قسم البداية */
+        .title-name { font-size: 3.5rem; color: white; margin-bottom: 20px; font-family: 'Georgia', serif; text-shadow: 0 0 15px rgba(255,255,255,0.3); }
+        .quote-box { font-size: 1.2rem; line-height: 1.7; color: #e1dded; margin-bottom: 35px; background: rgba(255, 255, 255, 0.03); padding: 20px; border-radius: 15px; border-right: 4px solid #ff2a74; text-align: right; }
+        
+        /* مشغل الصوت */
+        .audio-player { width: 100%; margin-bottom: 35px; background: rgba(255, 255, 255, 0.05); border-radius: 30px; padding: 5px; }
+        audio { width: 100%; filter: invert(1) hue-rotate(180deg); }
+
+        /* العداد التصاعدي المربعات */
+        .countdown-container { display: flex; gap: 10px; justify-content: center; width: 100%; margin-top: 10px; }
+        .time-box { background: rgba(255, 255, 255, 0.04); border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 12px; padding: 12px; min-width: 75px; box-shadow: 0 4px 10px rgba(0,0,0,0.3); }
+        .time-num { font-size: 1.8rem; font-weight: bold; color: #ff2a74; display: block; margin-bottom: 5px; }
+        .time-label { font-size: 0.8rem; color: #a5a1b2; }
+
+        /* قسم الذكريات المعروض بالصور */
+        .section-title { font-size: 1.8rem; color: #ff2a74; margin-bottom: 25px; font-weight: bold; }
+        .photo-card { background: #140e1f; border-radius: 15px; overflow: hidden; width: 100%; margin-bottom: 25px; border: 1px solid rgba(255, 255, 255, 0.05); box-shadow: 0 8px 20px rgba(0,0,0,0.4); }
+        .photo-card img { width: 100%; height: auto; display: block; max-height: 400px; object-fit: cover; background: #221a30; }
+        .photo-desc { padding: 15px; font-size: 1.1rem; color: #e1dded; border-top: 1px solid rgba(255,255,255,0.05); text-align: center; font-weight: 500; }
+
+        /* قسم السينما */
+        .video-container { width: 100%; background: #140e1f; border-radius: 15px; overflow: hidden; border: 1px solid rgba(255, 255, 255, 0.05); padding: 10px; }
+        video { width: 100%; border-radius: 10px; display: block; }
+
+        /* قسم كلمة أخيرة */
+        .letter-box { background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.05); padding: 30px 20px; border-radius: 20px; position: relative; text-align: right; line-height: 2; font-size: 1.1rem; color: #e1dded; width: 100%; }
+        .letter-box::before { content: "“"; font-size: 5rem; color: #ff2a74; position: absolute; top: -10px; right: 15px; opacity: 0.3; }
+        .signature { margin-top: 25px; text-align: left; color: #ff2a74; font-weight: bold; font-size: 1.2rem; }
 
         /* تأثير القلوب */
-        .heart { position: absolute; color: #ff2a74; font-size: 1.5rem; pointer-events: none; animation: fall linear infinite; top: -10%; opacity: 0.7; }
-        @keyframes fall {
-            to { transform: translateY(110vh) translateX(100px) rotate(360deg); opacity: 0; }
-        }
+        .heart { position: absolute; color: #ff2a74; font-size: 1.5rem; pointer-events: none; animation: fall linear infinite; top: -10%; opacity: 0.5; z-index: 1; }
+        @keyframes fall { to { transform: translateY(110vh) translateX(100px) rotate(360deg); opacity: 0; } }
     </style>
 </head>
 <body>
 
     <div class="lock-screen" id="lockScreen">
-        <h2>جاهزة؟ 🤔</h2>
-        <p>كل اللي هنا هيفضل بيني وبينك طول العمر ❤️</p>
-        <input type="password" class="input-box" id="passwordInput" placeholder="اكتبي الباسورد هنا...">
-        <button class="btn" onclick="checkPassword()">يلا بسرعة افتحي 😂❤️</button>
-        <p class="error-msg" id="errorMsg">الباسورد غلط، ركزي وافتكري الكلمة السرية! 😉</p>
+        <h1>Rodina</h1>
+        <p>منطقة محمية.. أدخل الرمز السري 🔒</p>
+        <input type="password" class="input-box" id="passwordInput" placeholder="••••">
+        <button class="btn" onclick="checkPassword()">فتح الموقع</button>
+        <p class="error-msg" id="errorMsg">الرمز السري غير صحيح، ركزي وافتكري! 😉</p>
     </div>
 
-    <div class="content-screen" id="contentScreen">
-        <h1 class="main-title">Rodina</h1> 
-        <p class="sub-text">يوم ما عرفنا بعض كان يوم ولادتي ❤️</p>
+    <div class="main-site" id="mainSite">
         
-        <div class="card">
-            <p class="card-title">❤️ اليوم اللي نور حياتي (ارتبطنا)</p>
-            <div class="date-box">2026-04-30</div> 
+        <div class="nav-tabs">
+            <button class="tab-btn active" onclick="switchTab(event, 'tab-start')">البداية</button>
+            <button class="tab-btn" onclick="switchTab(event, 'tab-memories')">الذكريات</button>
+            <button class="tab-btn" onclick="switchTab(event, 'tab-cinema')">السينما</button>
+            <button class="tab-btn" onclick="switchTab(event, 'tab-letter')">رسالة</button>
         </div>
+
+        <div id="tab-start" class="tab-content active">
+            <h2 class="title-name">Rodina ❤️</h2>
+            <div class="quote-box">
+                "إلى الشخص الذي غير حياتي للأجمل..<br>
+                هذا الموقع الصغير هو محاولة بسيطة لأقول لكِ:<br>
+                كل عام وأنتِ معي."
+            </div>
+            
+            <div class="audio-player">
+                <audio id="bgMusic" src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" controls loop></audio>
+            </div>
+
+            <div class="countdown-container">
+                <div class="time-box"><span class="time-num" id="days">0</span><span class="time-label">يوم</span></div>
+                <div class="time-box"><span class="time-num" id="hours">0</span><span class="time-label">ساعة</span></div>
+                <div class="time-box"><span class="time-num" id="minutes">0</span><span class="time-label">دقيقة</span></div>
+                <div class="time-box"><span class="time-num" id="seconds">0</span><span class="time-label">ثانية</span></div>
+            </div>
+        </div>
+
+        <div id="tab-memories" class="tab-content">
+            <h3 class="section-title">لحظات لا تُنسى 📸</h3>
+            
+            <div class="photo-card">
+                <img src="pic1.jpg" alt="اضغط لتغيير الصورة 1">
+                <div class="photo-desc">كل تفصيلة معاكي بتفرحني 💜</div>
+            </div>
+
+            <div class="photo-card">
+                <img src="pic2.jpg" alt="اضغط لتغيير الصورة 2">
+                <div class="photo-desc">ضحكتكِ دي هي سبب فرحتي في الدنيا 💕</div>
+            </div>
+
+            <div class="photo-card">
+                <img src="pic3.jpg" alt="اضغط لتغيير الصورة 3">
+                <div class="photo-desc">يوم ما ارتباطنا كان أحلى يوم في عمري 😍</div>
+            </div>
+        </div>
+
+        <div id="tab-cinema" class="tab-content">
+            <h3 class="section-title">سينما رودينا 🎬</h3>
+            <div class="video-container">
+                <video src="video.mp4" controls></video>
+                <div class="photo-desc">فيديو بسيط جمعت فيه كل اللحظات اللي بحبها ليكي 🥰</div>
+            </div>
+        </div>
+
+        <div id="tab-letter" class="tab-content">
+            <h3 class="section-title">كلمة أخيرة ✍️</h3>
+            <div class="letter-box">
+                يا رودينا.. الأيام بتعدي والسنين بتجري، بس مكانتكِ في قلبي بتزيد مش بتقل. أتمنى سنة 2026 تكون سنة العوض الجميل لكي، ونحقق فيها كل أحلامنا مع بعض.<br><br>
+                شكراً إنكِ موجودة في حياتي ومنوراها دايماً.
+                <div class="signature">- حبيبك ❤️</div>
+            </div>
+        </div>
+
     </div>
 
-    <script {timestamp}>
-        // الباسورد هو كلمة love بالصغير، تقدر تغيرها من هنا لو تحب
+    <script>
         const CORRECT_PASSWORD = "love"; 
+        const START_DATE = new Date("2026-04-30T00:00:00").getTime();
 
         function checkPassword() {
             const input = document.getElementById('passwordInput').value;
@@ -65,13 +151,46 @@
             
             if(input.toLowerCase() === CORRECT_PASSWORD.toLowerCase()) {
                 document.getElementById('lockScreen').style.display = 'none';
-                document.getElementById('contentScreen').style.display = 'flex';
+                document.getElementById('mainSite').style.display = 'flex';
+                
+                const audio = document.getElementById('bgMusic');
+                audio.play().catch(e => console.log("تفاعل مطلوب لتشغيل الصوت"));
+
+                setInterval(updateCountdown, 1000);
                 setInterval(createHeart, 300);
             } else {
                 error.style.display = 'block';
                 document.getElementById('passwordInput').style.transform = 'translateX(10px)';
                 setTimeout(() => document.getElementById('passwordInput').style.transform = 'translateX(0)', 100);
             }
+        }
+
+        function switchTab(evt, tabId) {
+            const contents = document.getElementsByClassName("tab-content");
+            for (let i = 0; i < contents.length; i++) {
+                contents[i].className = contents[i].className.replace(" active", "");
+            }
+            const buttons = document.getElementsByClassName("tab-btn");
+            for (let i = 0; i < buttons.length; i++) {
+                buttons[i].className = buttons[i].className.replace(" active", "");
+            }
+            document.getElementById(tabId).className += " active";
+            evt.currentTarget.className += " active";
+        }
+
+        function updateCountdown() {
+            const now = new Date().getTime();
+            const difference = now - START_DATE;
+
+            const days = Math.floor(difference / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((difference % (1000 * 60)) / 1000);
+
+            document.getElementById("days").innerText = days;
+            document.getElementById("hours").innerText = hours;
+            document.getElementById("minutes").innerText = minutes;
+            document.getElementById("seconds").innerText = seconds;
         }
 
         function createHeart() {
