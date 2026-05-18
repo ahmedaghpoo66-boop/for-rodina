@@ -137,7 +137,7 @@
     </div>
 
     <audio id="bgMusic" loop preload="auto">
-        <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mp3">
+        <source src="https://server11.mp3quran.net/download/extra/Amr_Diab_Ya_Agmal_Eyoun.mp3" type="audio/mp3">
     </audio>
 
     <script>
@@ -153,12 +153,10 @@
                 document.getElementById('lockScreen').classList.add('hide');
                 document.getElementById('mainContent').classList.add('show');
                 
-                // تشغيل الساوند فوراً وتخطي حظر المتصفحات العشوائي
                 if(music) {
                     setTimeout(() => {
                         music.play().catch(e => {
-                            console.log("المتصفح يطلب تفاعل أولاً:", e);
-                            // تشغيل احترازي عند أول لمسة شاشة لو المتصفح علق
+                            console.log("المتصفح حظر التشغيل التلقائي البدائي:", e);
                             document.addEventListener('click', () => { music.play(); }, { once: true });
                         });
                     }, 300);
