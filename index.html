@@ -149,7 +149,7 @@
     </div>
 
     <audio id="bgMusic" loop preload="auto">
-        <source src="https://server11.mp3quran.net/download/extra/Amr_Diab_Ya_Agmal_Eyoun.mp3" type="audio/mp3">
+        <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mp3">
     </audio>
 
     <script>
@@ -166,13 +166,14 @@
             if(entered.trim().toLowerCase() === CORRECT_PASSWORD) {
                 document.getElementById('lockScreen').classList.add('hide');
                 document.getElementById('mainContent').classList.add('show');
-                musicBtn.classList.add('show'); // إظهار زر التحكم
+                musicBtn.classList.add('show');
                 
                 if(music) {
                     setTimeout(() => {
                         music.play().then(() => { isPlaying = true; updateMusicIcon(); })
                         .catch(e => {
-                            console.log("المتصفح يطلب تفاعل أولاً:", e);
+                            console.log("حظر المتصفح:", e);
+                            // تشغيل احتياطي بمجرد لمس الشاشة لتخطي حماية المتصفح
                             document.addEventListener('click', () => { 
                                 if(!isPlaying) { music.play(); isPlaying = true; updateMusicIcon(); }
                             }, { once: true });
@@ -193,7 +194,7 @@
                 music.pause();
                 isPlaying = false;
             } else {
-                music.play();
+                music.play().catch(err => console.log(err));
                 isPlaying = true;
             }
             updateMusicIcon();
@@ -202,10 +203,8 @@
         function updateMusicIcon() {
             const icon = document.getElementById('musicIcon');
             if (isPlaying) {
-                // أيقونة النوتة الموسيقية (شغال)
                 icon.innerHTML = '<path d="M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z"/>';
             } else {
-                // أيقونة كتم الصوت / ميوت (مكتوم)
                 icon.innerHTML = '<path d="M4.27 3L3 4.27l9 9v.28c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4v-1.73l4 4L19.73 21 21 19.73 4.27 3zM14 7h4V3h-6v5.18l2 2z"/>';
             }
         }
