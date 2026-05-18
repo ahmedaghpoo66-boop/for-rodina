@@ -91,12 +91,12 @@
             <h2 style="color:#ff4d79; margin-bottom:20px;">لحظات محفورة في قلبي الحنون 📸</h2>
             
             <div class="media-container">
-                <img src="https://raw.githubusercontent.com/ahmedaghpoo66-boop/for-rodina/main/733c12f8a1dfbae973b451e9e02c52bd.jpg" alt="حبنا على الشاطئ">
+                <img src="https://raw.githubusercontent.com/ahmedaghpoo66-boop/for-rodina/main/06c82fa718c99fd2f67a1c7f9d40b49f.jpg" alt="حبنا على الشاطئ">
                 <div class="media-caption">خطواتنا سوا.. والكون كله شاهد على حبنا 🌊❤️</div>
             </div>
 
             <div class="media-container" style="margin-top: 30px;">
-                <img src="https://raw.githubusercontent.com/ahmedaghpoo66-boop/for-rodina/main/06c82fa718c99fd2f67a1c7f9d40b49f.jpg" alt="أجمل وعد">
+                <img src="https://raw.githubusercontent.com/ahmedaghpoo66-boop/for-rodina/main/733c12f8a1dfbae973b451e9e02c52bd.jpg" alt="أجمل وعد">
                 <div class="media-caption">اليوم اللي وعدتك فيه قدام ربنا والعالم إني هفضل ليكي ولأخر العمر 💍✨</div>
             </div>
 
@@ -130,7 +130,7 @@
 
             <div class="love-card">
                 <h3>وعدي ليكي..</h3>
-                <p>بوعدك قدام نفسي وقدام كل دقة قلب بتنبض ليكي، إني هفضل السند والظهر والأمان ليكي. هفضل أحكب في كل حالاتك، في زعلك قبل فرحك، وهتلاقيني دايماً بمسح دموعك وبزرع الضحكة على شفايفك النظيفة. إنتي ملكتي البطلة الأولى والأخيرة في رواية حياتي.</p>
+                <p>بوعدك قدام نفسي وقدام كل دقة قلب بتنبض ليكي، إني هفضل السند والظهر والأمان ليكي. هفضل أحبك في كل حالاتك، في زعلك قبل فرحك، وهتلاقيني دايماً بمسح دموعك وبزرع الضحكة على شفايفك النظيفة. إنتي ملكتي البطلة الأولى والأخيرة في رواية حياتي.</p>
             </div>
 
             <div class="love-card" style="background: linear-gradient(45deg, rgba(255,77,121,0.2), transparent);">
@@ -159,12 +159,12 @@
         </nav>
     </div>
 
-    <audio id="bgMusic" loop>
-        <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mp3">
+    <audio id="bgMusic" loop preload="auto">
+        <source src="https://actions.google.com/sounds/v1/ambiences/morning_birds.mp3" type="audio/mp3">
     </audio>
 
     <script>
-        const CORRECT_PASSWORD = "love"; 
+        const CORRECT_PASSWORD = "love rodina"; 
         const START_DATE = new Date("2026-04-30T00:00:00").getTime();
 
         function checkPassword() {
@@ -176,8 +176,15 @@
                 document.getElementById('lockScreen').classList.add('hide');
                 document.getElementById('mainContent').classList.add('show');
                 
+                // تشغيل إجباري للموسيقى مع تخطي قيود المتصفح
                 if(music) {
-                    music.play().catch(e => console.log("المتصفح حظر التشغيل التلقائي:", e));
+                    setTimeout(() => {
+                        music.play().catch(e => {
+                            console.log("المتصفح يطلب تفاعل أولاً:", e);
+                            // محاولة تشغيل ثانية عند أول لمسة شاشة احتیاطياً
+                            document.addEventListener('click', () => { music.play(); }, { once: true });
+                        });
+                    }, 300);
                 }
                 
                 setInterval(createHeart, 400);
