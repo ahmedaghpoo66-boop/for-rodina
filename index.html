@@ -91,17 +91,17 @@
             <h2 style="color:#ff4d79; margin-bottom:20px;">لحظات محفورة في قلبي الحنون 📸</h2>
             
             <div class="media-container">
-                <img src="48825.jpg" onerror="this.onerror=null; this.src='48825.JPG';" alt="حبنا على الشاطئ">
+                <img src="733c12f8a1dfbae973b451e9e02c52bd.jpg" alt="حبنا على الشاطئ">
                 <div class="media-caption">خطواتنا سوا.. والكون كله شاهد على حبنا 🌊❤️</div>
             </div>
 
             <div class="media-container" style="margin-top: 30px;">
-                <img src="48826.jpg" onerror="this.onerror=null; this.src='48826.JPG';" alt="أجمل وعد">
+                <img src="06c82fa718c99fd2f67a1c7f9d40b49f.jpg" alt="أجمل وعد">
                 <div class="media-caption">اليوم اللي وعدتك فيه قدام ربنا والعالم إني هفضل ليكي ولأخر العمر 💍✨</div>
             </div>
 
             <div class="media-container" style="margin-top: 30px;">
-                <img src="48827.jpg" onerror="this.onerror=null; this.src='48827.JPG';" alt="في حضنك">
+                <img src="ab22d162fb430c105e06c99b3517c6a8.jpg" alt="في حضنك">
                 <div class="media-caption">أماني كله بين إديكي وضمتك بتسوى الدنيا عندي 👩‍❤️‍👨💖</div>
             </div>
         </div>
@@ -113,8 +113,7 @@
             </div>
             <div class="media-container">
                 <video controls id="loveVideo" preload="auto">
-                    <source src="48832.mp4" type="video/mp4">
-                    <source src="48832.MP4" type="video/mp4">
+                    <source src="VID-20260518-WA0014.mp4" type="video/mp4">
                     متصفحك لا يدعم تشغيل الفيديو.
                 </video>
                 <div class="media-caption">جمالك اللي مفيش منه اتنين في العالم 🌸👑</div>
@@ -126,7 +125,7 @@
             
             <div class="love-card">
                 <h3>عشق لا ينتهي..</h3>
-                <p>يا رودينا.. الأيام بتعدي والسنين بتجري، بس مكانتك في قلبي بتزيد مش بتقل أبدًا. إنتي العوض الجميل اللي ربنا ادهولي، بتمنى نكون سوا دايماً، ونحقق فيها كل أحلامنا ونبني بيتنا الصغير اللي كله حب ودفا. شكراً لأنك موجودة في حياتي، وشكراً لقلبك اللي احتواني.</p>
+                <p>يا رودينا.. الأيام بتعدي والسنين بتجري، بس مكانتك في قلبي بتزيد مش بتقل أبدًا. إنتي العوض الجميل اللي ربنا ادهولي، بتمنى نكون سوا دايماً، ونحقق فيها كل أحلامنا ونبني بيتنا الصغير اللي كله حب دفا. شكراً لأنك موجودة في حياتي، وشكراً لقلبك اللي احتواني.</p>
             </div>
 
             <div class="love-card">
@@ -160,51 +159,26 @@
         </nav>
     </div>
 
-    <div id="youtube-player"></div>
+    <audio id="bgMusic" loop>
+        <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mp3">
+    </audio>
 
     <script>
-        // الرمز السري الجديد
         const CORRECT_PASSWORD = "love"; 
-        
-        // تاريخ بداية العلاقة الرسمي (30 إبريل 2026)
         const START_DATE = new Date("2026-04-30T00:00:00").getTime();
 
-        let musicPlayer;
-        
-        // تحميل الـ API الخاص بيوتيوب بشكل صحيح ومضمون
-        var tag = document.createElement('script');
-        tag.src = "https://www.youtube.com/iframe_api";
-        var firstScriptTag = document.getElementsByTagName('script')[0];
-        firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
-
-        function onYouTubeIframeAPIReady() {
-            musicPlayer = new YT.Player('youtube-player', {
-                height: '0',
-                width: '0',
-                videoId: 'fGFB29lQ-Vs',
-                playerVars: { 
-                    'autoplay': 0, 
-                    'loop': 1, 
-                    'playlist': 'fGFB29lQ-Vs',
-                    'controls': 0,
-                    'showinfo': 0,
-                    'modestbranding': 1
-                }
-            });
-        }
-
-        // تشغيل الموقع عند إدخال الرمز الصحيح
         function checkPassword() {
             const entered = document.getElementById('passwordField').value;
             const error = document.getElementById('errorMsg');
+            const music = document.getElementById('bgMusic');
             
             if(entered.trim().toLowerCase() === CORRECT_PASSWORD) {
                 document.getElementById('lockScreen').classList.add('hide');
                 document.getElementById('mainContent').classList.add('show');
                 
-                // تشغيل الأغنية فوراً
-                if (musicPlayer && musicPlayer.playVideo) {
-                    musicPlayer.playVideo();
+                // تشغيل الموسيقى فوراً بعد تفاعل المستخدم بضغط الزر
+                if(music) {
+                    music.play().catch(e => console.log("المتصفح حظر التشغيل التلقائي:", e));
                 }
                 
                 setInterval(createHeart, 400);
@@ -252,5 +226,5 @@
         }
     </script>
 </body>
-                    </html>
-                
+</html>
+
