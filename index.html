@@ -91,17 +91,17 @@
             <h2 style="color:#ff4d79; margin-bottom:20px;">لحظات محفورة في قلبي الحنون 📸</h2>
             
             <div class="media-container">
-                <img src="48825.JPG" alt="حبنا على الشاطئ">
+                <img src="48825.jpg" onerror="this.onerror=null; this.src='48825.JPG';" alt="حبنا على الشاطئ">
                 <div class="media-caption">خطواتنا سوا.. والكون كله شاهد على حبنا 🌊❤️</div>
             </div>
 
             <div class="media-container" style="margin-top: 30px;">
-                <img src="48826.JPG" alt="أجمل وعد">
+                <img src="48826.jpg" onerror="this.onerror=null; this.src='48826.JPG';" alt="أجمل وعد">
                 <div class="media-caption">اليوم اللي وعدتك فيه قدام ربنا والعالم إني هفضل ليكي ولأخر العمر 💍✨</div>
             </div>
 
             <div class="media-container" style="margin-top: 30px;">
-                <img src="48827.JPG" alt="في حضنك">
+                <img src="48827.jpg" onerror="this.onerror=null; this.src='48827.JPG';" alt="في حضنك">
                 <div class="media-caption">أماني كله بين إديكي وضمتك بتسوى الدنيا عندي 👩‍❤️‍👨💖</div>
             </div>
         </div>
@@ -112,8 +112,9 @@
                 <p style="margin-bottom: 15px;">فيديو بسيط جمعتلك فيه كل تفاصيل ملامحك الطيبة والجميلة اللي بتدوخني في هواكي، بشوفه وبفتكر قد إيه أنا محظوظ بيكي.</p>
             </div>
             <div class="media-container">
-                <video controls id="loveVideo">
+                <video controls id="loveVideo" preload="auto">
                     <source src="48832.mp4" type="video/mp4">
+                    <source src="48832.MP4" type="video/mp4">
                     متصفحك لا يدعم تشغيل الفيديو.
                 </video>
                 <div class="media-caption">جمالك اللي مفيش منه اتنين في العالم 🌸👑</div>
@@ -159,31 +160,40 @@
         </nav>
     </div>
 
-    <div id="youtube-player" style="display: none;"></div>
-    <script src="https://www.youtube.com/iframe_api"></script>
+    <div id="youtube-player"></div>
 
     <script>
-        // الرمز السري الجديد المحدث
+        // الرمز السري الجديد
         const CORRECT_PASSWORD = "love"; 
         
-        // تاريخ بداية العلاقة المحدث (30 إبريل 2026)
+        // تاريخ بداية العلاقة الرسمي (30 إبريل 2026)
         const START_DATE = new Date("2026-04-30T00:00:00").getTime();
 
         let musicPlayer;
         
+        // تحميل الـ API الخاص بيوتيوب بشكل صحيح ومضمون
+        var tag = document.createElement('script');
+        tag.src = "https://www.youtube.com/iframe_api";
+        var firstScriptTag = document.getElementsByTagName('script')[0];
+        firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
         function onYouTubeIframeAPIReady() {
             musicPlayer = new YT.Player('youtube-player', {
+                height: '0',
+                width: '0',
                 videoId: 'fGFB29lQ-Vs',
                 playerVars: { 
                     'autoplay': 0, 
                     'loop': 1, 
                     'playlist': 'fGFB29lQ-Vs',
                     'controls': 0,
-                    'disablekb': 1
+                    'showinfo': 0,
+                    'modestbranding': 1
                 }
             });
         }
 
+        // تشغيل الموقع عند إدخال الرمز الصحيح
         function checkPassword() {
             const entered = document.getElementById('passwordField').value;
             const error = document.getElementById('errorMsg');
@@ -242,5 +252,5 @@
         }
     </script>
 </body>
-</html>
-
+                    </html>
+                
