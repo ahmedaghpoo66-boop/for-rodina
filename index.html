@@ -175,8 +175,11 @@ function onYouTubeIframeAPIReady() {
         playerVars: { 'autoplay': 0, 'loop': 1, 'playlist': 'fGFB29lQ-Vs' }
     });
 }
-
-                document.getElementById('mainContent').classList.add('show');
+// تشغيل أغنية يوتيوب عند إدخال الباسورد الصحيح //
+if (musicPlayer && musicPlayer.playVideo) {
+    musicPlayer.playVideo();
+}
+;
                 
                 // تشغيل الأغنية تلقائياً عند الفتح
                 music.play().catch(e => console.log("المتصفح حظر التشغيل التلقائي حتى يتفاعل المستخدم"));
