@@ -118,7 +118,7 @@
             
             <div class="love-card">
                 <h3>عشق لا ينتهي..</h3>
-                <p>يا رودينا.. الأيام بتعدي والسنين بتجري، بس مكانتك في قلبي بتزيد مش بتقل أبدًا. إنتي العوض الجميل اللي ربنا ادهولي، بتمنى نكون سوا دايماً، ونحقق فيها كل أحلامنا ونبني بيتنا الصغير اللي كله حب دفا. شكراً لأنك موجودة في حياتي، وشكراً لقلبك اللي احتواني.</p>
+                <p>يا رودينا.. الأيام بتعدي والسنين بتجري، بس مكانتك في قلبي بتزيد مش بتقل أبدًا. إنتي العوض الجميل اللي ربنا ادهولي، بتمنى نكون سوا دايماً، ونحقق فيها كل أحلامنا ونبني بيتنا الصغير اللي كله حب دفا. شكراً لأنك موجودة in حياتي، وشكراً لقلبك اللي احتواني.</p>
             </div>
 
             <div class="love-card">
@@ -149,7 +149,7 @@
     </div>
 
     <audio id="bgMusic" loop preload="auto">
-        <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mp3">
+        <source src="https://raw.githubusercontent.com/ahmedaghpoo66-boop/for-rodina/main/music.mp3" type="audio/mp3">
     </audio>
 
     <script>
@@ -173,7 +173,6 @@
                         music.play().then(() => { isPlaying = true; updateMusicIcon(); })
                         .catch(e => {
                             console.log("حظر المتصفح:", e);
-                            // تشغيل احتياطي بمجرد لمس الشاشة لتخطي حماية المتصفح
                             document.addEventListener('click', () => { 
                                 if(!isPlaying) { music.play(); isPlaying = true; updateMusicIcon(); }
                             }, { once: true });
@@ -248,4 +247,3 @@
     </script>
 </body>
 </html>
-
