@@ -25,6 +25,12 @@
         header { padding: 30px 20px; background: linear-gradient(to bottom, rgba(255,77,121,0.2), transparent); }
         h1 { font-family: 'Reem Kufi', sans-serif; font-size: 2.5rem; color: #ff4d79; }
 
+        /* زر التحكم في الموسيقى العائم */
+        .music-control-btn { position: fixed; top: 20px; left: 20px; width: 50px; height: 50px; border-radius: 50%; border: 2px solid #ff4d79; background: rgba(15, 2, 14, 0.8); backdrop-filter: blur(5px); cursor: pointer; z-index: 999; display: none; align-items: center; justify-content: center; box-shadow: 0 4px 15px rgba(255,77,121,0.4); transition: 0.3s; }
+        .music-control-btn.show { display: flex; }
+        .music-control-btn svg { width: 24px; height: 24px; fill: #ff4d79; }
+        .music-control-btn:hover { transform: scale(1.1); }
+
         /* التبويبات السفلى */
         .nav-tabs { position: fixed; bottom: 0; left: 0; width: 100%; background: rgba(15, 2, 14, 0.95); border-top: 1px solid rgba(255,77,121,0.3); display: flex; justify-content: space-around; padding: 10px 0; z-index: 1000; backdrop-filter: blur(10px); }
         .tab-btn { background: none; border: none; color: #888; font-size: 0.9rem; font-family: 'Cairo', sans-serif; cursor: pointer; display: flex; flex-direction: column; align-items: center; gap: 5px; transition: 0.3s; width: 33%; }
@@ -58,6 +64,12 @@
     </style>
 </head>
 <body>
+
+    <button class="music-control-btn" id="musicBtn" onclick="toggleMusic()">
+        <svg id="musicIcon" viewBox="0 0 24 24">
+            <path d="M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z"/>
+        </svg>
+    </button>
 
     <div class="lock-screen" id="lockScreen">
         <div class="lock-title">رودينا ❤️</div>
@@ -143,21 +155,27 @@
     <script>
         const CORRECT_PASSWORD = "love rodina"; 
         const START_DATE = new Date("2026-04-30T00:00:00").getTime();
+        let isPlaying = false;
 
         function checkPassword() {
             const entered = document.getElementById('passwordField').value;
             const error = document.getElementById('errorMsg');
             const music = document.getElementById('bgMusic');
+            const musicBtn = document.getElementById('musicBtn');
             
             if(entered.trim().toLowerCase() === CORRECT_PASSWORD) {
                 document.getElementById('lockScreen').classList.add('hide');
                 document.getElementById('mainContent').classList.add('show');
+                musicBtn.classList.add('show'); // إظهار زر التحكم
                 
                 if(music) {
                     setTimeout(() => {
-                        music.play().catch(e => {
-                            console.log("المتصفح حظر التشغيل التلقائي البدائي:", e);
-                            document.addEventListener('click', () => { music.play(); }, { once: true });
+                        music.play().then(() => { isPlaying = true; updateMusicIcon(); })
+                        .catch(e => {
+                            console.log("المتصفح يطلب تفاعل أولاً:", e);
+                            document.addEventListener('click', () => { 
+                                if(!isPlaying) { music.play(); isPlaying = true; updateMusicIcon(); }
+                            }, { once: true });
                         });
                     }, 300);
                 }
@@ -166,6 +184,29 @@
                 setInterval(updateCountdown, 1000);
             } else {
                 error.style.display = 'block';
+            }
+        }
+
+        function toggleMusic() {
+            const music = document.getElementById('bgMusic');
+            if (isPlaying) {
+                music.pause();
+                isPlaying = false;
+            } else {
+                music.play();
+                isPlaying = true;
+            }
+            updateMusicIcon();
+        }
+
+        function updateMusicIcon() {
+            const icon = document.getElementById('musicIcon');
+            if (isPlaying) {
+                // أيقونة النوتة الموسيقية (شغال)
+                icon.innerHTML = '<path d="M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z"/>';
+            } else {
+                // أيقونة كتم الصوت / ميوت (مكتوم)
+                icon.innerHTML = '<path d="M4.27 3L3 4.27l9 9v.28c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4v-1.73l4 4L19.73 21 21 19.73 4.27 3zM14 7h4V3h-6v5.18l2 2z"/>';
             }
         }
 
