@@ -17,7 +17,7 @@
         .pass-input { padding: 12px 20px; width: 260px; border-radius: 25px; border: 2px solid #ff4d79; background: rgba(255,255,255,0.1); color: #fff; text-align: center; font-size: 1.2rem; outline: none; box-shadow: 0 0 10px rgba(255,77,121,0.3); margin-bottom: 20px; }
         .unlock-btn { padding: 12px 35px; border-radius: 25px; border: none; background: linear-gradient(45deg, #ff4d79, #b30047); color: #fff; font-size: 1.1rem; font-weight: bold; cursor: pointer; box-shadow: 0 4px 15px rgba(255,77,121,0.4); transition: 0.3s; }
         .unlock-btn:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(255,77,121,0.6); }
-        .error-msg { color: #ff3333; margin-top: 15px; font-size: 0.9.rem; display: none; }
+        .error-msg { color: #ff3333; margin-top: 15px; font-size: 0.9rem; display: none; }
 
         /* المحتوى الرئيسي */
         .main-content { padding-bottom: 80px; opacity: 0; transition: opacity 1s ease; display: none; }
@@ -44,7 +44,7 @@
         
         .media-container { margin-top: 20px; border-radius: 15px; overflow: hidden; box-shadow: 0 8px 25px rgba(0,0,0,0.6); border: 1px solid rgba(255,255,255,0.1); background: #000; }
         .media-container img, .media-container video { width: 100%; display: block; height: auto; object-fit: cover; }
-        .media-caption { padding: 12px; background: #150216; color: #ff4d79; font-weight: bold; font-size: 1rem; }
+        .media-caption { padding: 12px; background: #150216; color: #ff4d79; font-weight: bold; font-size: 1rem; text-align: center; }
 
         /* عداد الوقت */
         .countdown-container { display: flex; justify-content: center; gap: 15px; margin: 25px 0; }
@@ -91,17 +91,17 @@
             <h2 style="color:#ff4d79; margin-bottom:20px;">لحظات محفورة في قلبي الحنون 📸</h2>
             
             <div class="media-container">
-                <img src="https://github.com/ahmedaghpoo66-boop/for-rodina/raw/main/48825.jpg" alt="حبنا على الشاطئ">
+                <img src="48825.JPG" alt="حبنا على الشاطئ">
                 <div class="media-caption">خطواتنا سوا.. والكون كله شاهد على حبنا 🌊❤️</div>
             </div>
 
             <div class="media-container" style="margin-top: 30px;">
-                <img src="https://github.com/ahmedaghpoo66-boop/for-rodina/raw/main/48826.jpg" alt="أجمل وعد">
+                <img src="48826.JPG" alt="أجمل وعد">
                 <div class="media-caption">اليوم اللي وعدتك فيه قدام ربنا والعالم إني هفضل ليكي ولأخر العمر 💍✨</div>
             </div>
 
             <div class="media-container" style="margin-top: 30px;">
-                <img src="https://github.com/ahmedaghpoo66-boop/for-rodina/raw/main/48827.jpg" alt="في حضنك">
+                <img src="48827.JPG" alt="في حضنك">
                 <div class="media-caption">أماني كله بين إديكي وضمتك بتسوى الدنيا عندي 👩‍❤️‍👨💖</div>
             </div>
         </div>
@@ -113,7 +113,7 @@
             </div>
             <div class="media-container">
                 <video controls id="loveVideo">
-                    <source src="https://github.com/ahmedaghpoo66-boop/for-rodina/raw/main/48832.mp4" type="video/mp4">
+                    <source src="48832.mp4" type="video/mp4">
                     متصفحك لا يدعم تشغيل الفيديو.
                 </video>
                 <div class="media-caption">جمالك اللي مفيش منه اتنين في العالم 🌸👑</div>
@@ -125,7 +125,7 @@
             
             <div class="love-card">
                 <h3>عشق لا ينتهي..</h3>
-                <p>يا رودينا.. الأيام بتعدي والسنين بتجري، بس مكانتك في قلبي بتزيد مش بتقل أبدًا. إنتي العوض الجميل اللي ربنا ادهولي، بتمنى سنة 2026 وكل السنين اللي جاية نكون سوا، ونحقق فيها كل أحلامنا ونبني بيتنا الصغير اللي كله حب ودفا. شكراً لأنك موجودة في حياتي، وشكراً لقلبك اللي احتواني.</p>
+                <p>يا رودينا.. الأيام بتعدي والسنين بتجري، بس مكانتك في قلبي بتزيد مش بتقل أبدًا. إنتي العوض الجميل اللي ربنا ادهولي، بتمنى نكون سوا دايماً، ونحقق فيها كل أحلامنا ونبني بيتنا الصغير اللي كله حب ودفا. شكراً لأنك موجودة في حياتي، وشكراً لقلبك اللي احتواني.</p>
             </div>
 
             <div class="love-card">
@@ -158,41 +158,52 @@
             </button>
         </nav>
     </div>
-<div id="youtube-player" style="display: none;"></div>
-<script src="https://www.youtube.com/iframe_api"></script>
+
+    <div id="youtube-player" style="display: none;"></div>
+    <script src="https://www.youtube.com/iframe_api"></script>
 
     <script>
-        // التحقق من الباسورد الجديد
+        // الرمز السري الجديد المحدث
+        const CORRECT_PASSWORD = "love"; 
+        
+        // تاريخ بداية العلاقة المحدث (30 إبريل 2026)
+        const START_DATE = new Date("2026-04-30T00:00:00").getTime();
+
+        let musicPlayer;
+        
+        function onYouTubeIframeAPIReady() {
+            musicPlayer = new YT.Player('youtube-player', {
+                videoId: 'fGFB29lQ-Vs',
+                playerVars: { 
+                    'autoplay': 0, 
+                    'loop': 1, 
+                    'playlist': 'fGFB29lQ-Vs',
+                    'controls': 0,
+                    'disablekb': 1
+                }
+            });
+        }
+
         function checkPassword() {
             const entered = document.getElementById('passwordField').value;
             const error = document.getElementById('errorMsg');
-            const music = document.getElementById('bgMusic');
             
-            let musicPlayer;
-function onYouTubeIframeAPIReady() {
-    musicPlayer = new YT.Player('youtube-player', {
-        videoId: 'fGFB29lQ-Vs',
-        playerVars: { 'autoplay': 0, 'loop': 1, 'playlist': 'fGFB29lQ-Vs' }
-    });
-}
-// تشغيل أغنية يوتيوب عند إدخال الباسورد الصحيح //
-if (musicPlayer && musicPlayer.playVideo) {
-    musicPlayer.playVideo();
-}
-;
+            if(entered.trim().toLowerCase() === CORRECT_PASSWORD) {
+                document.getElementById('lockScreen').classList.add('hide');
+                document.getElementById('mainContent').classList.add('show');
                 
-                // تشغيل الأغنية تلقائياً عند الفتح
-                music.play().catch(e => console.log("المتصفح حظر التشغيل التلقائي حتى يتفاعل المستخدم"));
+                // تشغيل الأغنية فوراً
+                if (musicPlayer && musicPlayer.playVideo) {
+                    musicPlayer.playVideo();
+                }
                 
-                // تفعيل تأثير القلوب المتساقطة
                 setInterval(createHeart, 400);
-                startCounter();
+                setInterval(updateCountdown, 1000);
             } else {
                 error.style.display = 'block';
             }
         }
 
-        // التنقل بين التبويبات
         function switchTab(panelId, btn) {
             document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
             document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
@@ -200,32 +211,25 @@ if (musicPlayer && musicPlayer.playVideo) {
             document.getElementById(panelId).classList.add('active');
             btn.classList.add('active');
             
-            // إيقاف فيديو السينما مؤقتا لو خرجت من التبويب
             const vid = document.getElementById('loveVideo');
             if(panelId !== 'panel-cinema' && vid) { vid.pause(); }
         }
 
-        // عداد الوقت التلقائي (من بداية علاقتكم - كمثال تاريخ افتراضي ويمكنك تعديله)
-        function startCounter() {
-            const startDate = new Date('May 1, 2025 00:00:00').getTime();
-            
-            setInterval(() => {
-                const now = new Date().getTime();
-                const diff = now - startDate;
-                
-                const d = Math.floor(diff / (1000 * 60 * 60 * 24));
-                const h = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-                const m = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
-                const s = Math.floor((diff % (1000 * 60)) / 1000);
-                
-                document.getElementById('days').innerText = d;
-                document.getElementById('hours').innerText = h;
-                document.getElementById('minutes').innerText = m;
-                document.getElementById('seconds').innerText = s;
-            }, 1000);
+        function updateCountdown() {
+            const now = new Date().getTime();
+            const difference = now - START_DATE;
+
+            const d = Math.floor(difference / (1000 * 60 * 60 * 24));
+            const h = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const m = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
+            const s = Math.floor((difference % (1000 * 60)) / 1000);
+
+            document.getElementById('days').innerText = d;
+            document.getElementById('hours').innerText = h;
+            document.getElementById('minutes').innerText = m;
+            document.getElementById('seconds').innerText = s;
         }
 
-        // تأثير القلوب المتساقطة الرومانسي
         function createHeart() {
             const heart = document.createElement('div');
             heart.classList.add('heart');
@@ -239,3 +243,4 @@ if (musicPlayer && musicPlayer.playVideo) {
     </script>
 </body>
 </html>
+
